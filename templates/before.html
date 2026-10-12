@@ -1,0 +1,53 @@
+<html>
+
+<head>
+    <title>Sign up</title>
+    <style>
+        body {
+            font-family: Arial;
+            color: #aaa;
+            background: #fff;
+            margin: 20px
+        }
+
+        a {
+            color: #bbb
+        }
+
+        input {
+            border: 1px solid #ccc;
+            padding: 8px;
+            outline: none;
+            display: block;
+            margin: 8px 0
+        }
+
+        .btn {
+            background: #7aa7e6;
+            color: #fff;
+            padding: 10px 16px;
+            display: inline-block;
+            cursor: pointer
+        }
+
+        .bad {
+            border-color: red
+        }
+    </style>
+</head>
+
+<body>
+    <div class="top"><img
+            src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='40'%3E%3Crect width='120' height='40' fill='%23345'/%3E%3C/svg%3E">
+        <a href="#">Home</a> <a href="#">Plans</a></div>
+    <h1>Join the club</h1>
+    <h4>Create your account</h4>
+    <input id="name" placeholder="Full name">
+    <input id="email" placeholder="Email">
+    <div class="btn" onclick="go()">Sign up</div>
+    <script>
+        function go() {var e = document.getElementById('email'); if (!/@/.test(e.value)) {e.className = 'bad';} else {alert('Done');} }
+    </script>
+</body>
+
+</html>

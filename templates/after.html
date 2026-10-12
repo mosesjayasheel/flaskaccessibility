@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Sign up</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      color: #1b1f24;
+      background: #fff;
+      margin: 20px;
+      line-height: 1.5
+    }
+
+    a {
+      color: #0b57d0
+    }
+
+    :focus-visible {
+      outline: 3px solid #0b57d0;
+      outline-offset: 2px
+    }
+
+    .skip {
+      position: absolute;
+      left: 8px;
+      top: -60px;
+      background: #fff;
+      padding: 8px 12px;
+      border: 2px solid #0b57d0
+    }
+
+    .skip:focus {
+      top: 8px
+    }
+
+    label {
+      display: block;
+      font-weight: bold;
+      margin-top: 12px
+    }
+
+    input {
+      border: 2px solid #6b7580;
+      padding: 8px;
+      display: block;
+      margin: 4px 0
+    }
+
+    input[aria-invalid=true] {
+      border-color: #b3261e
+    }
+
+    .err {
+      color: #b3261e;
+      margin: 2px 0
+    }
+
+    button {
+      background: #0b57d0;
+      color: #fff;
+      border: 2px solid #0b57d0;
+      padding: 10px 16px;
+      margin-top: 12px;
+      cursor: pointer
+    }
+  </style>
+</head>
+
+<body>
+  <a class="skip" href="#main">Skip to main content</a>
+  <header>
+    <img alt="Club logo"
+      src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='40'%3E%3Crect width='120' height='40' fill='%23345'/%3E%3C/svg%3E">
+    <nav aria-label="Primary"><a href="#">Home</a> <a href="#">Plans</a></nav>
+  </header>
+  <main id="main">
+    <h1>Join the club</h1>
+    <h2>Create your account</h2>
+    <form id="f" novalidate>
+      <label for="name">Full name</label>
+      <input id="name" autocomplete="name" aria-invalid="false" aria-describedby="name-err">
+      <p class="err" id="name-err"></p>
+      <label for="email">Email</label>
+      <input id="email" type="email" autocomplete="email" aria-invalid="false" aria-describedby="email-err">
+      <p class="err" id="email-err"></p>
+      <button type="submit">Sign up</button>
+    </form>
+    <p id="status" role="status"></p>
+  </main>
+  <script>
+    document.getElementById('f').addEventListener('submit', function (ev) {
+      ev.preventDefault();
+      var first = null, ok = true;
+      [['name', 'Enter your full name.'], ['email', 'Enter an email address like name@example.com.']].forEach(function (p) {
+        var i = document.getElementById(p[0]), bad = p[0] === 'email' ? !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(i.value) : !i.value.trim();
+        i.setAttribute('aria-invalid', bad ? 'true' : 'false');
+        document.getElementById(p[0] + '-err').textContent = bad ? p[1] : '';
+        if (bad) {ok = false; if (!first) first = i;}
+      });
+      document.getElementById('status').textContent = ok ? 'Account created.' : '';
+      if (first) first.focus();
+    });
+  </script>
+</body>
+
+</html>
